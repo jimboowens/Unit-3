@@ -13,3 +13,12 @@ const server = http.createServer((req, res)=>{
 })
 
 server.listen(3000)
+
+function n (x){
+    return function(y){
+        console.log(x+y)
+    }
+}
+
+n(2)(3)
+
