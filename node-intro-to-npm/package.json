@@ -1,0 +1,25 @@
+{
+  "name": "intro-to-npm",
+  "version": "1.0.0",
+  "description": "This is a test package.json",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimboowens/Unit-3.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "npm",
+    "javascript"
+  ],
+  "author": "Jim Owens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimboowens/Unit-3/issues"
+  },
+  "homepage": "https://github.com/jimboowens/Unit-3#readme"
+}
