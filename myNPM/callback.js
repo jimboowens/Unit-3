@@ -61,3 +61,21 @@ let y = findElem(array2, findValue)
 console.log(x)
 console.log(y)
 
+function squareIt(number, callback){
+    // doStuff...
+    //  console.log(callback(x,y)**2);
+    let square = number ** 2;
+    return callback(square)
+  }
+  
+  function triple(something){
+    return something * 3;
+  }
+  
+  function multiplyEm(a,b){
+     return a*b;
+  }
+  
+  let num = multiplyEm(3, 5);
+  let result = squareIt(num, triple);
+  console.log(result);
