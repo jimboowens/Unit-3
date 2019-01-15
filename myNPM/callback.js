@@ -44,7 +44,7 @@ function findElem(arr, callback){
 }
 function findValue(array){
     let counter = 0
-    array.map((item)=>{
+    return array.map((item)=>{
         if (item%2===0){
             console.log (`item is `,item)
             counter++
