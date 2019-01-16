@@ -22,4 +22,3 @@ async function asyncReadFile(){
     var result = await asyncFile
     console.log(result)
 }
-asyncReadFile(asyncFile)
