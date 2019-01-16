@@ -1,0 +1,36 @@
+{
+  "name": "callback-day-3",
+  "version": "1.0.0",
+  "description": "first express working",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "this is the test command"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimboowens/Unit-3.git"
+  },
+  "keywords": [
+    "callback",
+    "github",
+    "programming",
+    "programmer",
+    "fun",
+    "jim",
+    "npm",
+    "node",
+    "node.js",
+    "server",
+    "learning"
+  ],
+  "author": "Jim Owens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimboowens/Unit-3/issues"
+  },
+  "homepage": "https://github.com/jimboowens/Unit-3#readme"
+}
