@@ -12,6 +12,8 @@
     <div class="wrapper">
         <div class="row">
             <div class="col-sm-12">
+                <!-- a really cool trick is you can include another ejs file(html in so many words) with the include command -->
+                <%include search-movies%>
                 <!-- so ejs has access to res.locals, so there is no need to specify that -->
                 <h1>Your IP is <%=ip%></h1>
                 <div class="row">
