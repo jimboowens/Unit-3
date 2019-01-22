@@ -2,30 +2,6 @@ var express = require('express');
 var router = express.Router();
 var request = require ('request')
 
-let students= [
-  'Zac',
-  'Jim',
-  'JR',
-  'Matt',
-  'Greg',
-  'Christopher',
-  'Noelle',
-  'Cody',
-  'Jason',
-  'Katie',
-  'Ron',
-  'Rob',
-  'Brian',
-  'Gbenga',
-  'Michael',
-  'Khanh',
-  'Brandon',
-  'Sean',
-  'Connor',
-  'Kyle',
-  'Ian',
-  'Robert',
-]
 
 router.get('/', function(req,res, next){
   request.get(nowPlayingUrl,(error, response, body)=>{
@@ -57,7 +33,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/search-movies/movie', (req,res)=>{
-res.json(req.body)
+  const movieTitle = req.body.movieTitle
+// res.json(req.body) 
+  const searchUrl = `${apiBaseUrl}/search/movie?query=${movieTitle}&api_key=${apiKey}`
+  request.get(searchUrl,(error, response, body)=>{
+    const parsedData = JSON.parse(body)
+    res.render('now_playing',{
+      imageBaseUrl, parsedData:parsedData.results,
+    })
+  })
 })
 
 module.exports = router;
