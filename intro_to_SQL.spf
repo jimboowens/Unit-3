@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>colorIndex</key>
+			<integer>3</integer>
+			<key>database</key>
+			<string>classicmodels</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>3823553861613463191</string>
+			<key>name</key>
+			<string>localDB</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGOTpYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK0HCBUWFxgZHSQoLDE2VSRudWxs0wkK
+			CwwQFFdOUy5rZXlzWk5TLm9iamVjdHNWJGNsYXNzow0OD4ACgAOA
+			BKMREhOABYAGgAiADFR0eXBlVHJvd3NUa2V5c18QJlNlbGVjdGlv
+			bkRldGFpbFR5cGVQcmltYXJ5S2V5ZWREZXRhaWxz0wkKCxobHKCg
+			gAfSHh8gIVokY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxl
+			RGljdGlvbmFyeaMgIiNcTlNEaWN0aW9uYXJ5WE5TT2JqZWN00goL
+			JSehJoAJgAvSCykqK1lOUy5zdHJpbmeACl5lbXBsb3llZU51bWJl
+			ctIeHy0uXxAPTlNNdXRhYmxlU3RyaW5noy0vMFhOU1N0cmluZ1hO
+			U09iamVjdNIeHzIzXk5TTXV0YWJsZUFycmF5ozI0NVdOU0FycmF5
+			WE5TT2JqZWN00h4fIjeiIjhYTlNPYmplY3RfEA9OU0tleWVkQXJj
+			aGl2ZXLROzxUZGF0YYABAAgAEQAaACMALQAyADcARQBLAFIAWgBl
+			AGwAcAByAHQAdgB6AHwAfgCAAIIAhwCMAJEAugDBAMIAwwDFAMoA
+			1QDeAPQA+AEFAQ4BEwEVARcBGQEeASgBKgE5AT4BUAFUAV0BZgFr
+			AXoBfgGGAY8BlAGXAaABsgG1AboAAAAAAAACAQAAAAAAAAA9AAAA
+			AAAAAAAAAAAAAAABvA==
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1611, 884}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>-- Select = I want some records/ROWS
+
+-- after select comes what columns you want:
+--	* = all available
+--	city = I want city only
+--	city, phone = city and phone columns
+-- after the column(s) comes the keyword FROM , then comes the table you want to query
+-- 	employees
+-- 	customers
+-- always end sql statements with a ;
+
+-- select * from employees;
+-- select lastName,firstName from employees
+-- select * from employees where jobTitle='sales rep';
+-- select lastName,firstName,extension from employees where jobTitle='sales rep';
+-- we can ask for 'distinct' results  
+-- select distinct(jobTitle) from employees;
+-- select distinct(status) from orders;
+	/*this gives:
+	Shipped
+	Resolved
+	Cancelled
+	On Hold
+	Disputed
+	In Process */
+
+select * from orders where status = 'cancelled'or status ='resolved';
+-- this returns all info for items where the status was either cancelled or resolved, which is cool
+
+select * from orders where '2003-01-01'&lt; orderDate and orderDate &lt;'2004-01-01';
+-- but this doesn't work if you put '2003-01-01'&lt; orderDate &lt;'2004-01-01'; 
+
+-- the big advantage of like is you can use % which is a wild card inside of a string
+
+select * from productlines where productLine like 'planes';
+
+select * from employees where lastName like '%ur%';
+
+select * from employees where firstName like 'D%' and lastName like '%ur%';
+
+-- this is a different search from:
+select * from employees where firstName like '%d%' and lastname like '%ur%';
+
+select * from offices order by city asc;
+
+-- after everything, you can choose to limit the number of rows returned
+-- limit takes 2 args, a start and an end. If there is only one, then it 
+-- considers the number given as the end
+-- limit must come at the end, as the other parameters would be compromised if limit were taken beforehand
+
+select * from orderdetails order by priceEach desc limit 15;
+
+-- you can create a 'new' temp column in your select
+select *, quantityOrdered * priceEach from orderDetails;
+
+-- in order to change the name of quantityOrdered* priceEach, you can use the as command
+select *, quantityOrdered*priceEach as orderTotal from orderDetails;
+
+select *, quantityOrdered*priceEach as orderTotal from orderDetails order by orderTotal desc limit 15;
+
+-- get all employees where their office code is 1, 2, or 3
+select * from employees where officeCode = '1' or officeCode = '2' or officeCode = '3';
+
+-- is the same as:
+select * from employees where officeCode in (1,2,3);
+
+-- CRUD:
+--	 	create
+-- 		read
+-- 		update
+-- 		delete
+-- select gets rows, where gets columns, and subcommands of where allow further specification
+
+-- math function from excel are available as well
+
+select AVG(quantityOrdered*priceEach) as orderAverage from orderDetails order by orderAverage;
+
+-- you cannot grab other columns unless you tell it how you want them. This won't work:
+
+select AVG(quantityOrdered*priceEach), orderNumber as orderAverage from orderDetails order by orderAverage;
+
+
+-- ------------classwork
+
+-- SQL problem queries:
+
+
+-- Get all rows from employee who are sales reps
+
+select * from employees where jobTitle = 'sales rep';
+
+-- Get all rows who aren't sales reps in office 1. Return only name and email
+
+select concat(LastName, " ", firstName) as fullName, email from employees where jobTitle = 'sales rep' and officeCode != 1;
+
+-- Get a unique list of managers by pulling the reports to
+
+select distinct(reportsTo) from employees;
+
+-- Get the name and office code of everyone who's name contains a "b"
+
+select firstName, LastName, officeCode from employees where firstName like '%b%' or lastName like '%b%';
+
+-- ...where the office code is 1,3 or 5
+select firstName, LastName, officeCode from employees where officeCode in(1,3,5); 
+
+-- ... only managers 
+select * from employees where jobTitle != 'sales rep';
+
+-- Pull the first 10 rows by customer name from customers
+
+select * from customers order by customerName limit 10;
+
+-- ... Only bring back name
+
+select customerName from customers order by customerName limit 10;
+ 
+
+-- Bring back all payments and the associated customer data
+
+select customers.*, payments.amount from payments
+join customers on payments.customerNumber=customers.customerNumber
+order by customerName asc;
+
+-- … limit the results to those with an ammount above 1000
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &gt;1000 order by customerName asc;
+
+-- Get the total of all order amounts where the customer number is 124 (and round)
+
+-- USE SUM!
+select SUM(amount) from payments where customerNumber = 124;
+
+ 
+
+-- As a bonus, try and combine the results of customers, orders, and orderdtails into one resulting data
+
+
+
+-- ------classwork, some of which we aren't yet able to solve
+
+-- shorten names, so writing an extensive column isn't so verbose
+
+select employeeNumber as en from employees;
+
+-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &gt;1000 order by customerName asc;
+
+--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select payments.amount, customers.customerName, concat(employees.lastName, ", ", employees.firstName) as en from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;5000 order by en asc;
+</string>
+			<key>table</key>
+			<string>employees</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>-- … limit the results to those with an ammount above 1000
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select customers.*, payments.amount from payments
+join customers on payments.customerNumber=customers.customerNumber
+order by customerName asc</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select customers.*, payments.amount from payments
+join customers on payments.customerNumber=customers.customerNumber</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select customers, payments.amount from payments
+join customers on payments.customerNumber=customers.customerNumber</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select customers.customerName, payments.amount from payments
+join customers on payments.customerNumber=customers.customerNumber</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select * from payments
+join customers on payments.customerNumber=customers.customerNumber</string>
+		<string>-- Bring back all payments and the associated customer data
+
+select * from payments</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select payments.amount, customers.customerName, concat(employees.lastName, ", ", employees.firstName) as en from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;5000 order by en asc</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select payments.amount, customers.customerName, concat(employees.lastName, ", ", employees.firstName) from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select payments.amount, customers.customerName, concat(employees.lastName, " ", employees.firstName) from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select payments.amount, customers.customerName from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select * from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepEmployeeNumber = employees.employeeNumber</string>
+		<string>--  now we want the salesrep's name
+
+/* my guess:
+
+ select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc; 
+
+*/
+
+select * from payments
+inner join customers on customers.customerNumber = payments.customerNumber
+inner join employees on customers.salesRepByEmployeeNumber = employees.employeeNumber</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on customers.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join employees on table.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join (customers on payments.customerNumber = customers.customerNumber) as table
+	join table on table.salesRepEmployeeNumber = employees.employeeNumber
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber as table
+	join table on table.salesRepEmployeeNumber = employees.employeeNumber
+	
+where amount &gt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRepEmployeeNumber from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &lt;1000 order by customerName asc</string>
+		<string>-- join allows us to bring two tables together, and makes it wider
+-- where union makes a table taller
+
+select payments.amount, customers.customerName, customers.salesRep from payments
+	join customers on payments.customerNumber = customers.customerNumber
+where amount &gt;1000 order by customerName asc</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.7.25</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

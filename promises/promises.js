@@ -20,48 +20,16 @@ let movieData = ``
     // reject
 // start it by using "new" method.
 
-// const moviePromise = new Promise((resolve, reject)=>{
-//     return new Promise((resolve, reject)=>{
-//         request.get(nowPlayingUrl, (err, response, body)=>{
-//             if(err) {
-//                 reject(err)
-//             };
-//             // when we call resolve, the promise is done to the outside world. 
-//             // when we call reject, we let the world know our promise failed.
-//             let parsedBody = JSON.parse(body)
-//             resolve(parsedBody)
-//         })
-//     })
-// })
-// console.log(moviePromise)
-
 const moviePromise = new Promise((resolve,reject)=>{
     request.get(nowPlayingUrl,(err,response,body)=>{
         if(err){
-            reject(err);
+            reject(err)
         }
-        // when we call reject, the outside world will know our promise has failed
-        const parsedBody = JSON.parse(body)
-        // console.log(parsedBody);
-
+        // when we call resolve, the promise is done to the outside world. 
         // when we call resolve, the outside world, will know the promise is done
-        resolve(parsedBody);
+        resolve(JSON.parse(body))
     })
 })
-
-
-// moviePromise.then((dataGivenToResolve)=>{
-//     // console.log(dataGivenToResolve)
-//     const castUrl = `${apiBaseUrl}/${movieData.results[0].id}/creditsapi_key${apiKey}`
-//     console.log(castUrl)
-// }).catch((theDataGivenToReject)=>{
-//     console.log(theDataGivenToReject)
-// })
-
-// // console.log(`movieData is: ${movieData}`)
-// // request.get(castUrl, (err, response, body)=>{
-
-// // })
 
 moviePromise.then((movieData)=>{
     return new Promise((resolve,reject)=>{
@@ -70,7 +38,7 @@ moviePromise.then((movieData)=>{
         const castUrl = `${apiBaseUrl}/movie/${id}/credits?api_key=${apiKey}`
         // console.log(castUrl)
         request.get(castUrl,(err,response,body)=>{
-            const castParsed = JSON.parse(body);
+            const castParsed = JSON.parse(body)
             resolve(castParsed)
         })
     })
@@ -78,7 +46,7 @@ moviePromise.then((movieData)=>{
 }).then((castParsed)=>{
     const actorData = castParsed.cast[0].id
     // console.log(actorData)
-    const peopleUrl = `${apiBaseUrl}/person/${actorData}?api_key=${apiKey}`;
+    const peopleUrl = `${apiBaseUrl}/person/${actorData}?api_key=${apiKey}`
     request.get(peopleUrl,(err, response,body)=>{
         const actorParsed = JSON.parse(body)
         console.log(actorParsed)
