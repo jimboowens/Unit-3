@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A todo app in Express/Node</title>
+    <link rel="stylesheet" href="/stylesheets/darkly.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+      <p><a href ="pithos">Pithos</a></p>
+      <p><a href ="movie_app">Movie App</a></p>
+      <p><a href ="Christmas_Timer">Christmas Timer</a></p>
+      <p><a href ="memory_game">Memory Game</a></p>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h1>Your ToDo List...</h1>
+            <form class="form-inline" action="/addItem" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="New Task" name="taskName" />
+                </div>
+                <div class="input-group">
+                  <input type="date" class="form-control" name="taskDate" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Add New Task</button>
+            </form>          
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <table class="table">
+                  <tr>
+                      <th>Task Name</th>
+                      <th>Task Due Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              <% for(let i = 0; i<tasks.length; i++) { %>
+                  <tr>
+                      <td><%= tasks[i].taskName %></td>
+                      <td><%= tasks[i].taskDate %></td>
+                      <td>
+                          <a href="/edit/<%= tasks[i].id %>">
+                              <button class="btn btn-warning">Edit</button>
+                          </a>
+                      </td>
+                      <td>
+                          <a href="/delete/<%= tasks[i].id %>">
+                              <button class="btn btn-danger">Delete</button>
+                          </a>
+                      </td> 
+                  </tr>
+              <% } %>
+              </table>
+          </div>
+        </div>
+      </div>
+   </div>
+  </body>
+</html>
