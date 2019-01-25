@@ -37,8 +37,8 @@ function convertPhone(phonestr){
         let regEx = /\d/g;
         let correctPhone= phonestr[i].match(regEx);
         // console.log(correctPhone)
-        if (correctPhone.length <=10){
-            console.log("Invalid Number")
+        if (correctPhone.length <10){
+            // console.log("Invalid Number")
         }else if (correctPhone.length >= 10){
             // console.log(correctPhone)
             let tenDigit = correctPhone.slice(0,10);
@@ -77,9 +77,9 @@ function caseConvert(str, conversionType){
 } 
 const string = "The Rain in SPAIN stays mainly in the plain";
 let camelCase = caseConvert(string, 'camelCase');
-console.log(camelCase);
+// console.log(camelCase);
 let snake_case = caseConvert(string, 'snake_case');
-console.log(snake_case);
+// console.log(snake_case);
 // var re = /(\b[a-z](?!\s))/g;
 // var s = "fort collins, croton-on-hudson, harper's ferry, coeur d'alene, o'fallon"; 
 // s = s.replace(re, function(x){return x.toUpperCase();});
@@ -96,10 +96,10 @@ console.log(snake_case);
 
 let cardNumber;
 let cardType = `null`;
-let discoverCard = new RegExp(/^6011/g)
-let visaCard = new RegExp(/^4/g)
-let masterCard = new RegExp(/^[[50][51][52][53][54][55]]/g)
-let amExpress = new RegExp(/^[[34][37]]/g)
+let discoverCard = new RegExp(/^6011/)
+let visaCard = new RegExp(/^4/)
+let masterCard = new RegExp(/^5[1-5]/)
+let amExpress = new RegExp(/^3(4|7)/)
 function cardTypeTest(cardNumber){
     cardNumber+= ''
     if (cardNumber.length === 16){
@@ -111,12 +111,12 @@ function cardTypeTest(cardNumber){
         } else if (masterCard.test(cardNumber)){
             cardType = 'MasterCard'
         } else {
-            cardType = 'invalid'
+            cardType = 'invalid card'
         }
     } else if (amExpress.test(cardNumber)&&cardNumber.length===15){
         cardType = 'American Express'
     } else {
-        cardType = 'invalid'
+        cardType = 'invalid, incorrect quantity of numbers'
     }
     console.log(cardType)
     return cardType;
@@ -126,4 +126,5 @@ cardTypeTest(1111111111111111)
 cardTypeTest(6011111122223333)
 cardTypeTest(4373333333333333)
 cardTypeTest(373333333333333)
+cardTypeTest(5533333333333333)
 
