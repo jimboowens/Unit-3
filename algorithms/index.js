@@ -17,6 +17,14 @@
 // 1-800-ninjas-are-cool
 // 1900-acdc4life.
 
+const convertPhoneRob = (input) => {
+    var str = input.replace(/[^\d]/g, '');
+    console.log(str)
+    str = (str[0][0] == 1) ? str.substr(1) : str;
+    return (str.length >= 11) ? `${str.slice(0,3)}-${str.slice(3,6)}-${str.slice(6,11)}` : new Error('invalid number');
+}
+console.log(convertPhoneRob('12798504trumpforprezdlfkgjskld4930685439268-45906'))
+
 array =[
     '555-555-5555', 
     '(555)555-5555',
@@ -35,7 +43,12 @@ function convertPhone(phonestr){
     let finalArray =[];
     for(i=0;i<phonestr.length;i++){
         let regEx = /\d/g;
-        let correctPhone= phonestr[i].match(regEx);
+        let correctPhone= phonestr[i].match(regEx)
+        // correctPhone = correctPhone.replace(/1/,'')
+        let oneTest = new RegExp(/^1/)
+        if (oneTest.test(correctPhone)){
+            correctPhone = correctPhone.replace(/1/,'')  
+        }
         // console.log(correctPhone)
         if (correctPhone.length <10){
             // console.log("Invalid Number")
@@ -46,9 +59,10 @@ function convertPhone(phonestr){
             tenDigit.splice(7,0,'-');
             let completeNumber = tenDigit.join("");
             finalArray.push(completeNumber)
-            console.log(finalArray)
         }
     }
+    console.log(finalArray);
+    return finalArray;
 }
 
 convertPhone(array)
@@ -80,10 +94,12 @@ let camelCase = caseConvert(string, 'camelCase');
 // console.log(camelCase);
 let snake_case = caseConvert(string, 'snake_case');
 // console.log(snake_case);
+
+
 // var re = /(\b[a-z](?!\s))/g;
 // var s = "fort collins, croton-on-hudson, harper's ferry, coeur d'alene, o'fallon"; 
-// s = s.replace(re, function(x){return x.toUpperCase();});
-// console.log(s); // "Fort Collins, Croton-On-Hudson, Harper's Ferry, Coeur D'Alene, O'
+// s = s.replace(re, function(letter)(letter.toUpperCase()));
+// console.log(s);
 
 // Write a JavaScript program to validate that a credit card number:
 
@@ -116,13 +132,14 @@ function cardTypeTest(cardNumber){
     } else if (amExpress.test(cardNumber)&&cardNumber.length===15){
         cardType = 'American Express'
     } else {
-        cardType = 'invalid, incorrect quantity of numbers'
+        cardType = 'invalid card, incorrect quantity of numbers'
     }
     console.log(cardType)
     return cardType;
 }
 
 cardTypeTest(1111111111111111)
+cardTypeTest(111111111111111)
 cardTypeTest(6011111122223333)
 cardTypeTest(4373333333333333)
 cardTypeTest(373333333333333)
