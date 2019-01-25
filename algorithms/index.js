@@ -95,7 +95,6 @@ let camelCase = caseConvert(string, 'camelCase');
 let snake_case = caseConvert(string, 'snake_case');
 // console.log(snake_case);
 
-
 // var re = /(\b[a-z](?!\s))/g;
 // var s = "fort collins, croton-on-hudson, harper's ferry, coeur d'alene, o'fallon"; 
 // s = s.replace(re, function(letter)(letter.toUpperCase()));
