@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A todo app in Express/Node</title>
+    <link rel="stylesheet" href="/stylesheets/darkly.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h1>Your ToDo List...</h1>
+            <form class="form-inline" action="/editItem" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" value="<%=task.taskName%>" name="taskName" />
+                </div>
+                <div class="input-group">
+                  <input type="date" class="form-control" value="<%=task.taskDate%>" name="taskDate"/>
+                </div>
+                <input type="hidden" value="<%=task.id%>" name="taskId">
+              </div>
+              <button type="submit" class="btn btn-primary">Update Task</button>
+            </form>          
+          </div>
+        </div>
+      </div>
+   </div>
+  </body>
+</html>
